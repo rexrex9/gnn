@@ -99,8 +99,8 @@ def do_evaluate( model, testSet ):
         labels = testSet[:, 2]
         logits = model( user_ids, item_ids, True )
         predictions = [1 if i >= 0.5 else 0 for i in logits]
-        p = precision(y_true = labels, y_pred = predictions)
-        r = recall(y_true = labels, y_pred = predictions)
+        p = precision_score(y_true = labels, y_pred = predictions)
+        r = recall_score(y_true = labels, y_pred = predictions)
         acc = accuracy_score(labels, y_pred = predictions)
         return p,r,acc
 
