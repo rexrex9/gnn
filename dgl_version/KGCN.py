@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from tqdm import tqdm #产生进度条
 import dataloader4kg
-from sklearn.metrics import roc_auc_score,precision_score,recall_score,accuracy_score
+from sklearn.metrics import precision_score,recall_score,accuracy_score
 
 class KGCN( nn.Module ):
 
@@ -145,10 +145,10 @@ def train( epochs, batchSize, lr,
 if __name__ == '__main__':
     n_neighbors = 10
 
-    users, items, train_set, test_set = dataloader4kg.readRecData( dataloader4kg.Ml_100K.RATING )
-    entitys, relations, kgTriples = dataloader4kg.readKgData( dataloader4kg.Ml_100K.KG )
-    adj_kg = dataloader4kg.construct_kg( kgTriples )
-    adj_entity, adj_relation = dataloader4kg.construct_adj( n_neighbors, adj_kg, len( entitys ) )
+    users, items, train_set, test_set = dataloader4kg.readRecData(dataloader4kg.Ml_100K.RATING)
+    entitys, relations, kgTriples = dataloader4kg.readKgData(dataloader4kg.Ml_100K.KG)
+    adj_kg = dataloader4kg.construct_kg(kgTriples)
+    adj_entity, adj_relation = dataloader4kg.construct_adj(n_neighbors, adj_kg, len(entitys))
 
     train( epochs = 10, batchSize = 1024, lr = 0.01,
            n_users = max( users ) + 1, n_entitys = max( entitys ) + 1,
